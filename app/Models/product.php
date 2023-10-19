@@ -10,7 +10,7 @@ class product extends Model
 {
     use HasFactory;
     
-    //検索処理
+    //検索処理です
     public function searchList($request){
         //受け取ったform内のname="keyword"とnome="search-company"を変数に詰める。
         $keyword = $request->input('keyword');
