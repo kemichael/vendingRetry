@@ -11,7 +11,7 @@ $(function(){
     console.log('読み込みOK');
     
 
-    //検索ボタン押下イベント
+    //検索ボタン押下イベントです
     $('#search-btn').on('click', function(e){
         console.log('検索押した');
         e.preventDefault();
@@ -26,7 +26,7 @@ $(function(){
         }).done(function(data){
             console.log('成功');
             let newTable = $(data).find('#products-table');
-            $('#products-table').html(newTable);
+            $('#products-table').replaceWith(newTable);
             loadSort();
         }).fail(function(){
             alert('通信失敗');
@@ -55,7 +55,8 @@ $(function(){
             }).done(function(){
                 console.log('削除成功');
                 clickEle.parents('tr').remove();
-                loadSort();
+                //テーブルの更新
+                $('#pr-table').trigger("update");
             }).fail(function(){
                 console.log('削除失敗');
             })

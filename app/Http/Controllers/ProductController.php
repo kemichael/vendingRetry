@@ -12,12 +12,21 @@ class ProductController extends Controller
 {
     // 一覧表示
     public function showList(Request $request){
+        //受け取ったform内のname="keyword"とnome="search-company"を変数に詰める。
+        $keyword = $request->input('keyword');
+        $searchCompany = $request->input('search-company');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $min_stock = $request->input('min_stock');
+        $max_stock = $request->input('max_stock');
+
         $model = New product;
-        $products = $model->searchList($request);
+        $products = $model->searchList($keyword, $searchCompany, $min_price, $max_price, $min_stock, $max_stock);
 
         $companies = DB::table('companies')->get();
 
         return view('lists',['products' => $products, 'companies' => $companies]);
+        
     }
 
 
@@ -46,6 +55,7 @@ class ProductController extends Controller
             }
 
             $companies = DB::table('companies')->get();
+            
             $products = $model->registSubmit($request, $img_path);
 
             DB::commit();

@@ -10,15 +10,8 @@ class product extends Model
 {
     use HasFactory;
     
-    //検索処理
-    public function searchList($request){
-        //受け取ったform内のname="keyword"とnome="search-company"を変数に詰める。
-        $keyword = $request->input('keyword');
-        $searchCompany = $request->input('search-company');
-        $min_price = $request->input('min_price');
-        $max_price = $request->input('max_price');
-        $min_stock = $request->input('min_stock');
-        $max_stock = $request->input('max_stock');
+    //検索処理です
+    public function searchList($keyword, $searchCompany, $min_price, $max_price, $min_stock, $max_stock){
 
         //productsテーブルとcompaniesテーブルをjoin
         $query = DB::table('products')
@@ -32,10 +25,10 @@ class product extends Model
         }
         //企業idでwhere
         if($searchCompany) {
-            $query->where('products.company_id', '=', "$searchCompany");
+            $query->where('products.company_id', '=', $searchCompany);
         }
 
-        //価格下限
+        // 価格下限
         if($min_price) {
             $query->where('products.price', '>=', $min_price);
         }
@@ -61,7 +54,8 @@ class product extends Model
 
     //idによる商品検索
     public function getProductById($id){
-        $products=DB::table('products')->join('companies', 'products.company_id', '=', 'companies.id')
+        $products=DB::table('products')
+            ->join('companies', 'products.company_id', '=', 'companies.id')
             ->select('products.*', 'companies.company_name')
             ->where('products.id', '=', $id)
             ->first();

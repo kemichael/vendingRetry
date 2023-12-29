@@ -31,8 +31,12 @@
                         <td>{{ $product->stock }}</td>
                     </tr>
                     <tr>
-                        <td>金爆</td>
+                        <td>金額</td>
                         <td>{{ $product->price }}</td>
+                    </tr>
+                    <tr>
+                        <td>コメント</td>
+                        <td>{{ $product->comment }}</td>
                     </tr>
                 </table>
                 <button onclick="location.href='{{ route('edit', ['id' => $product->id])}}'" class="btn btn-primary">商品編集</button>

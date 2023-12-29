@@ -55,23 +55,23 @@
                     </thead>
                     <tbody>
                         @foreach($products as $product)
-                        <tr>
-                            <td>{{ $product->id }}</td>
-                            <td><img src="{{ asset($product->img_path) }}" alt="商品画像" class="img_view"></td>
-                            <td>{{ $product->product_name }}</td>
-                            <td>{{ $product->company_name }}</td>
-                            <td>{{ $product->price }}</td>
-                            <td>{{ $product->stock }}</td>
-                            <td>{{ $product->comment }}</td>
-                            <td><input type="button" value='詳細' onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-primary"></td>
-                            <td>
-                                <form action="{{ route('destroy',['id' => $product->id ])}}" method="POST">
-                                    @csrf
-                                    @method('delete')
-                                    <input type="submit" class="btn btn-danger delete-btn" value="削除" data-delete-id="{{ $product->id}}"></td>
-                                </form>
-                            
-                        </tr>
+                            <tr>
+                                <td>{{ $product->id }}</td>
+                                <td><img src="{{ asset($product->img_path) }}" alt="商品画像" class="img_view"></td>
+                                <td>{{ $product->product_name }}</td>
+                                <td>{{ $product->company_name }}</td>
+                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td>{{ $product->comment }}</td>
+                                <td><input type="button" value='詳細' onclick="location.href='{{ route('detail', ['id' => $product->id]) }}'" class="btn btn-primary"></td>
+                                <td>
+                                    <form action="{{ route('destroy',['id' => $product->id ])}}" method="POST">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="submit" class="btn btn-danger delete-btn" value="削除" data-delete-id="{{ $product->id}}"></td>
+                                    </form>
+                                
+                            </tr>
                         @endforeach
                     </tbody>
                    
